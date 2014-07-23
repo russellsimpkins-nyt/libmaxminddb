@@ -45,7 +45,8 @@ void for_all_record_sizes(const char *filename_fmt,
                                         const char *description))
 {
     int sizes[] = { 24, 28, 32 };
-    for (int i = 0; i < 3; i++) {
+    int i;
+    for (i = 0; i < 3; i++) {
         int size = sizes[i];
 
         char filename[500];

@@ -53,8 +53,8 @@ DEBUG_FUNC char *byte_to_binary(uint8_t byte)
     if (NULL == bits) {
         return bits;
     }
-
-    for (uint8_t i = 0; i < 8; i++) {
+    uint8_t i;
+    for (i = 0; i < 8; i++) {
         bits[i] = byte & (128 >> i) ? '1' : '0';
     }
     bits[8] = '\0';
@@ -475,8 +475,8 @@ LOCAL int populate_languages_metadata(MMDB_s *mmdb, MMDB_s *metadata_db,
     if (NULL == mmdb->metadata.languages.names) {
         return MMDB_OUT_OF_MEMORY_ERROR;
     }
-
-    for (uint32_t i = 0; i < array_size; i++) {
+    uint32_t i;
+    for (i = 0; i < array_size; i++) {
         member = member->next;
         if (MMDB_DATA_TYPE_UTF8_STRING != member->entry_data.type) {
             return MMDB_INVALID_METADATA_ERROR;
@@ -528,8 +528,8 @@ LOCAL int populate_description_metadata(MMDB_s *mmdb, MMDB_s *metadata_db,
     if (NULL == mmdb->metadata.description.descriptions) {
         return MMDB_OUT_OF_MEMORY_ERROR;
     }
-
-    for (uint32_t i = 0; i < map_size; i++) {
+    uint32_t i;
+    for (i = 0; i < map_size; i++) {
         mmdb->metadata.description.descriptions[i] =
             malloc(sizeof(MMDB_description_s));
         if (NULL == mmdb->metadata.description.descriptions[i]) {
@@ -712,7 +712,8 @@ LOCAL int find_address_in_search_tree(MMDB_s *mmdb, uint8_t *address,
 
     const uint8_t *search_tree = mmdb->file_content;
     const uint8_t *record_pointer;
-    for (int current_bit = start_bit; current_bit >= 0; current_bit--) {
+    int current_bit;
+    for (current_bit = start_bit; current_bit >= 0; current_bit--) {
         uint8_t bit_is_true =
             address[(max_depth0 - current_bit) >> 3]
             & (1U << (~(max_depth0 - current_bit) & 7)) ? 1 : 0;
@@ -977,8 +978,8 @@ LOCAL int lookup_path_in_array(const char *path_elem, MMDB_s *mmdb,
         memset(entry_data, 0, sizeof(MMDB_entry_data_s));
         return MMDB_LOOKUP_PATH_DOES_NOT_MATCH_DATA_ERROR;
     }
-
-    for (int i = 0; i < array_index; i++) {
+    int i;
+    for (i = 0; i < array_index; i++) {
         /* We don't want to follow a pointer here. If the next element is a
          * pointer we simply skip it and keep going */
         CHECKED_DECODE_ONE(mmdb, entry_data->offset_to_next, entry_data);
@@ -1519,8 +1520,8 @@ LOCAL void free_languages_metadata(MMDB_s *mmdb)
     if (!mmdb->metadata.languages.count) {
         return;
     }
-
-    for (size_t i = 0; i < mmdb->metadata.languages.count; i++) {
+    size_t i;
+    for (i = 0; i < mmdb->metadata.languages.count; i++) {
         free((char *)mmdb->metadata.languages.names[i]);
     }
     free(mmdb->metadata.languages.names);
@@ -1531,8 +1532,8 @@ LOCAL void free_descriptions_metadata(MMDB_s *mmdb)
     if (!mmdb->metadata.description.count) {
         return;
     }
-
-    for (size_t i = 0; i < mmdb->metadata.description.count; i++) {
+    size_t i;
+    for (i = 0; i < mmdb->metadata.description.count; i++) {
         if (NULL != mmdb->metadata.description.descriptions[i]) {
             if (NULL !=
                 mmdb->metadata.description.descriptions[i]->language) {
@@ -1743,8 +1744,8 @@ LOCAL char *bytes_to_hex(uint8_t *bytes, uint32_t size)
 {
     char *hex_string = malloc((size * 2) + 1);
     char *hex_pointer = hex_string;
-
-    for (uint32_t i = 0; i < size; i++) {
+    uint32_t i;
+    for (i = 0; i < size; i++) {
         sprintf(hex_pointer + (2 * i), "%02X", bytes[i]);
     }
 

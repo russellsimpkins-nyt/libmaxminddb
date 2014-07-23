@@ -1,19 +1,16 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ([2.63])
+AC_PREREQ([2.59])
 AC_INIT([libmaxminddb], [0.5.6], [support@maxmind.com])
 AC_CONFIG_SRCDIR([include/maxminddb.h])
 AC_CONFIG_HEADERS([config.h include/maxminddb_config.h])
 
 LT_INIT
-AM_INIT_AUTOMAKE(foreign m4_esyscmd([case `automake --version | head -n 1` in
-                                     *1.11*);;
-                                     *) echo serial-tests;;
-                                     esac]))
+AM_INIT_AUTOMAKE(foreign m4_esyscmd())
 AC_PROG_LIBTOOL
 # Checks for programs.
-AC_PROG_CC_C99
+AC_PROG_CC
 
 # Copied from http://stackoverflow.com/a/10682813/9832 and tweaked for C (as
 # opposed to C++)
@@ -53,24 +50,6 @@ CC=`echo ${CC} | sed 's/-std=gnu99/-std=c99/'`
 AC_C_RESTRICT
 
 AC_CHECK_HEADERS([arpa/inet.h assert.h fcntl.h inttypes.h libgen.h math.h netdb.h netinet/in.h stdarg.h stdbool.h stdint.h stdio.h stdlib.h string.h sys/mman.h sys/socket.h sys/stat.h sys/time.h sys/types.h unistd.h])
-
-# configure generates an invalid config for MinGW because of the type checks
-# so we only run them on non MinGW-Systems. For MinGW we also need to link
-# against ws2_32.
-AC_CANONICAL_HOST
-case $host_os in
-        mingw*)
-                LDFLAGS="-lws2_32"
-        ;;
-        *)
-                AC_TYPE_OFF_T
-                AC_TYPE_SIZE_T
-                AC_TYPE_SSIZE_T
-                AC_TYPE_UINT8_T
-                AC_TYPE_UINT32_T
-                AC_TYPE_UINT64_T
-        ;;
-esac
 
 
 # This check is backwards in order to make life easier for people writing

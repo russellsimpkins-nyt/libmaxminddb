@@ -241,8 +241,8 @@ LOCAL void dump_meta(MMDB_s *mmdb)
             mmdb->metadata.build_epoch,
             date,
             mmdb->metadata.database_type);
-
-    for (size_t i = 0; i < mmdb->metadata.languages.count; i++) {
+    size_t i;
+    for (i = 0; i < mmdb->metadata.languages.count; i++) {
         fprintf(stdout, "%s", mmdb->metadata.languages.names[i]);
         if (i < mmdb->metadata.languages.count - 1) {
             fprintf(stdout, " ");
@@ -251,7 +251,7 @@ LOCAL void dump_meta(MMDB_s *mmdb)
     fprintf(stdout, "\n");
 
     fprintf(stdout, "    Description:\n");
-    for (size_t i = 0; i < mmdb->metadata.description.count; i++) {
+    for (i = 0; i < mmdb->metadata.description.count; i++) {
         fprintf(stdout, "      %s:   %s\n",
                 mmdb->metadata.description.descriptions[i]->language,
                 mmdb->metadata.description.descriptions[i]->description);
@@ -326,8 +326,8 @@ LOCAL int benchmark(MMDB_s *mmdb, int iterations)
 
     srand( time(NULL) );
     clock_t time = clock();
-
-    for (int i = 0; i < iterations; i++) {
+    int i;
+    for (i = 0; i < iterations; i++) {
         random_ipv4(ip_address);
 
         MMDB_lookup_result_s result = lookup_or_die(mmdb, ip_address);
