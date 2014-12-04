@@ -6,4 +6,4 @@
 	url = https://github.com/zorgnax/libtap.git
 [submodule "t/maxmind-db"]
 	path = t/maxmind-db
-	url = git://github.com/maxmind/MaxMind-DB.git
+	url = https://github.com/maxmind/MaxMind-DB.git
