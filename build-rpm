@@ -1,0 +1,8 @@
+#!/bin/bash
+
+rpmbuild -bb rpm.spec
+for e in $(find ~/rpmbuild/RPMS -name libmaxmdinddb\*.rpm); do
+    sign-rpm $e
+    publish-rpm $e
+    rm -f $e
+done
