@@ -1,7 +1,7 @@
 %define maxmindSrc https://github.com/russellsimpkins-nyt/libmaxminddb.git
 
 Summary: libmaxminddb provides functions for the maxmind geoip database
-Name: libmaxmdinddb
+Name: libmaxminddb
 Version: 1.0.0
 Release: 1
 License: Apache
